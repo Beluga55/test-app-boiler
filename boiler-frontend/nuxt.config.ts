@@ -8,4 +8,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/app.scss'],
+  runtimeConfig: {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  },
 })
