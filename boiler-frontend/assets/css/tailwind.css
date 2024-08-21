@@ -34,6 +34,20 @@
     --ring: 222.2 84% 4.9%;
  
     --radius: 0.5rem;
+
+    /* ====== OVERVIEW PAGE COLOURS ====== */
+    --overview-background: #0D0E0C;
+    --overview-secondary-background: #191919;
+    --overview-primary: #DCF928;
+    --overview-secondary: #EDFF7F;
+    --overview-text: #ffffff;
+    --overview-text-secondary: #ababab;
+    --overview-error: #ff4e4e;
+    --overview-warning: #FFAB2C;
+    --overview-success: #DCF928;
+    --overview-border: #27272A;
+    --overview-button: #27272A;
+    --overview-repo-button: #353535;
   }
  
   .dark {
