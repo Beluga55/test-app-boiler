@@ -1,57 +1,18 @@
 <script setup lang="ts">
-  import { SearchIcon } from '../pages/overview/icons.js'
+  import { Search } from "lucide-vue-next";
 </script>
 
 <template>
-  <nav class="top__nav">
-    <div class="top__nav--wrapper">
-      <h1>Pet Management System / Overview</h1>
+  <nav class="bg-overview-secondary-background w-full">
+    <div class="px-6 py-[11px] flex items-center">
+      <h1 class="text-sm font-bold text-overview-text-secondary flex-1">Pet Management System / Overview</h1>
 
-      <div class="top__nav-search">
-        <button>
-          <SearchIcon width="12px" height="12px" />
+      <div class="w-full bg-overview-border flex justify-center rounded-[5px] flex-1">
+        <button class="flex items-center gap-2.5 text-[10px] text-overview-text-secondary py-2">
+          <Search :size="12" />
           Pet Management System
         </button>
       </div>
     </div>
   </nav>
 </template>
-
-<style scoped lang="scss">
-  .top__nav {
-    background: var(--secondary-background);
-    width: 100%;
-
-    .top__nav--wrapper {
-      padding: 11px 24px;
-      display: flex;
-      align-items: center;
-
-      > * {
-        flex: 1;
-      }
-    }
-
-    h1 {
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .top__nav-search {
-      width: 100%;
-      background: var(--border);
-      display: flex;
-      justify-content: center;
-      border-radius: 5px;
-
-      button {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 10px;
-        color: #ABABAB;
-        padding: 8px 0;
-      }
-    }
-  }
-</style>
