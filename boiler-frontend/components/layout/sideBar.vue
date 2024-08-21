@@ -1,184 +1,83 @@
 <script setup>
-import { ref } from 'vue'
-import DefaultImage from "assets/images/default-user-icon.jpg"
-import { ChevronLeft, ChevronsUpDown, Pen, Share2, OverviewIcon, GlobeIcon, CircleIcon, SettingsIcon, Logout } from '../pages/overview/icons.js'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import DefaultImage from "@/assets/images/default-user-icon.jpg"
+import { ChevronLeft, Pen, Share2, Globe, Settings, LogIn as Logout } from 'lucide-vue-next'
+import ComboBox from '~/components/elements/ComboBox.vue'
 
-const activeButton = ref('Overview')
+const route = useRoute()
 
-const handleSidebarButton = (buttonName) => {
-  activeButton.value = buttonName
+const navItems = ref([
+  { name: 'Overview', path: '/overview', icon: 'icon-overview' },
+  { name: 'Routes', path: '/routes', icon: Share2 },
+  { name: 'Revisions', path: '/revisions', icon: 'icon-circle' },
+  { name: 'Editor', path: '/editor', icon: Pen },
+  { name: 'Domains', path: '/domains', icon: Globe },
+])
+
+/* ====== ACTIVE CLASS BASED ON ROUTES ====== */
+const isActive = computed(() => (path) => route.path === path)
+
+/* ====== RENDER ICON BASED ON TYPE ====== */
+const renderIcon = (icon) => {
+  if (typeof icon === 'string') {
+    if (icon === 'icon-circle') {
+      return h('span', { class: 'icon-circle text-[14px]' }, // ICOMOON return SVG to <span>
+          Array.from({ length: 11 }, (_, i) => h('span', { class: `path${i + 1}` }))
+      )
+    }
+    return h('span', { class: `${icon} text-[14px]` })
+  }
+  return h(icon, { size: 14 })
 }
-
-const navItems = [
-  { name: 'Overview', icon: OverviewIcon },
-  { name: 'Routes', icon: Share2 },
-  { name: 'Revisions', icon: CircleIcon },
-  { name: 'Editor', icon: Pen },
-  { name: 'Domains', icon: GlobeIcon },
-]
 </script>
 
 <template>
-  <div class="sidebar">
-    <div class="sidebar__upper">
-      <div class="sidebar__header">
-        <div class="sidebar__title">
-          <h1>BLDR.</h1>
-          <ChevronLeft height="18px" style="cursor: pointer;" width="18px"/>
+  <aside class="w-[180px] h-screen flex flex-col justify-between border-r-2 border-solid border-overview-border">
+    <div>
+      <header class="pb-2 border-b-2 border-solid border-overview-border">
+        <div class="pt-3.5 px-3.5 flex items-center justify-between">
+          <h1 class="text-base font-bold">BLDR.</h1>
+          <ChevronLeft class="cursor-pointer" :size="18" />
         </div>
-        <div class="credit-badge">
-          <p>100 credits remaining +</p>
+        <div class="credit-badge text-black mt-[7px] ml-3.5 rounded-[32px] text-center w-fit py-[3px] px-1.5">
+          <p class="font-medium text-[10px]">100 credits remaining +</p>
         </div>
-        <div class="repository">
-          <button>pets-management-system</button>
-          <ChevronsUpDown color="#A1A1AA" height="14px" style="cursor: pointer;" width="14px"/>
+        <div class="flex items-center gap-[7px] mt-3 mx-2 px-[13px] py-[9px] bg-overview-repo-button border-2 border-solid border-overview-border rounded-[6px]">
+          <ComboBox />
         </div>
-      </div>
-      <div class="sidebar__navigation">
-        <div v-for="item in navItems" :key="item.name" class="sidebar__nav-item">
-          <button
-              :class="{ 'button--active': activeButton === item.name }"
-              @click="handleSidebarButton(item.name)"
-          >
-            <component :is="item.icon" height="14" width="14"/>
-            {{ item.name }}
-          </button>
-        </div>
-      </div>
+      </header>
+      <nav class="px-2 py-1">
+        <NuxtLink
+            v-for="item in navItems"
+            :key="item.name"
+            :to="item.path"
+            class="py-2.5 px-[10.5px] flex items-center gap-2 text-xs font-medium w-full cursor-pointer no-underline text-inherit"
+            :class="{ 'bg-overview-button rounded-md text-overview-primary': isActive(item.path) }"
+        >
+          <component :is="renderIcon(item.icon)" />
+          {{ item.name }}
+        </NuxtLink>
+      </nav>
     </div>
-    <div class="sidebar__lower">
-      <div class="profile__picture">
-        <img :src="DefaultImage" alt="profile picture"/> <!-- Temporary -->
-        <p>ShaneWen</p>
+    <footer class="border-t-2 border-solid border-overview-border py-[9px] px-2 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img class="w-6 h-6" :src="DefaultImage" alt="Profile picture" />
+        <p class="text-xs font-medium">ShaneWen</p>
       </div>
-      <div class="profile__icon">
-        <component :is="SettingsIcon" height="12" width="12"/>
-        <Logout height="12" width="12"/>
+      <div class="flex items-center gap-3.5">
+        <Settings :size="12" />
+        <Logout :size="12" />
       </div>
-    </div>
-  </div>
+    </footer>
+  </aside>
 </template>
 
 <style lang="scss" scoped>
-.sidebar {
-  width: 180px;
-  height: 100vh;
-  border-right: 2px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  .sidebar__title {
-    padding: 14px 14px 0;
-  }
-
-  .sidebar__lower {
-    border-top: 2px solid var(--border);
-    padding: 9px 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .profile__picture {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      img {
-        width: 24px;
-        height: 24px;
-      }
-
-      p {
-        font-size: 12px;
-        font-weight: 500;
-      }
-    }
-
-    .profile__icon {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-  }
-}
-
-.sidebar__upper {
-  .sidebar__header {
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
-    background: var(--secondary-background);
-  }
+  @import url("@/assets/css/icon-font.css");
 
   .credit-badge {
-    background: linear-gradient(49deg, var(--primary) 0%, var(--secondary) 100%);
-    color: black;
-    margin-top: 7px;
-    border-radius: 2rem;
-    text-align: center;
-    width: fit-content;
-    padding: 3px 6px;
-    margin-left: 14px;
-
-
-    p {
-      font-size: 10px;
-      font-weight: 500;
-    }
+    background: linear-gradient(49deg, var(--overview-primary) 0%, var(--overview-secondary) 100%);
   }
-
-  .sidebar__navigation {
-    padding: 4px 8px;
-
-    .sidebar__nav-item {
-      button {
-        padding: 10px 10.5px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        font-weight: 500;
-        width: 100%;
-        cursor: pointer;
-      }
-
-      .button--active {
-        background: var(--button);
-        border-radius: 6px;
-        color: var(--primary);
-      }
-    }
-  }
-}
-
-.sidebar__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  h1 {
-    font-weight: bolder;
-    font-size: 1rem;
-  }
-}
-
-.repository {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 12px 8px 0;
-  padding: 9px 13px;
-  background: #353535;
-  border: 2px solid var(--border);
-  border-radius: 6px;
-
-  button {
-    width: 110px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 12px;
-    font-weight: 400;
-  }
-}
 </style>
+
