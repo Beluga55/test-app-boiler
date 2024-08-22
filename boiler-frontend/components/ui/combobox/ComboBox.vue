@@ -29,10 +29,6 @@ const repository = [
 const open = ref(false)
 const value = ref('')
 
-const widthClass = computed(() => {
-  return value.value.length > 20 ? 'w-[100px]' : 'w-fit'
-}) // if the value is more than 20 characters, the width will be 100px, otherwise it will be auto
-
 </script>
 
 <template>
@@ -45,7 +41,7 @@ const widthClass = computed(() => {
           :aria-expanded="open"
           class="w-[200px] justify-between"
       >
-        <p :class="[widthClass, 'overflow-hidden', 'overflow-ellipsis']">
+        <p class='w-[100px] overflow-hidden overflow-ellipsis text-left'>
         {{ value
           ? repository.find((framework) => framework.value === value)?.label
           : "Select Repository..." }}
