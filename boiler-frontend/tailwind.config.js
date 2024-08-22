@@ -19,15 +19,32 @@ module.exports = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: {
+          DEFAULT: "#0D0E0C",
+          secondary: "#191919",
+        },
+        text: {
+          DEFAULT: "#ffffff",
+          secondary: "#ababab",
+          error: "#ff4e4e",
+          warning: "#FFAB2C",
+          success: "#DCF928",
+        },
+        border: "#27272A",
+        button: {
+          DEFAULT: "#27272A",
+          secondary: "#353535",
+        },
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          system: "#DCF928"
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+          system: "#EDFF7F",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -49,18 +66,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        'overview-background': "var(--overview-background)",
-        'overview-secondary-background': "var(--overview-secondary-background)",
-        'overview-primary': "var(--overview-primary)",
-        'overview-secondary': "var(--overview-secondary)",
-        'overview-text': "var(--overview-text)",
-        'overview-text-secondary': "var(--overview-text-secondary)",
-        'overview-error': "var(--overview-error)",
-        'overview-warning': "var(--overview-warning)",
-        'overview-success': "var(--overview-success)",
-        'overview-border': "var(--overview-border)",
-        'overview-button': "var(--overview-button)",
-        "overview-repo-button": "var(--overview-repo-button)",
       },
       borderRadius: {
       	xl: "calc(var(--radius) + 4px)",
