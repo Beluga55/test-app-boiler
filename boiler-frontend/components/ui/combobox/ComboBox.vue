@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Check, ChevronsUpDown } from 'lucide-vue-next'
+import { CaretSortIcon, CheckIcon } from '@radix-icons/vue'
 
 import { cn } from '~/lib/utils'
 import { Button } from '~/components/ui/button'
@@ -46,7 +46,7 @@ const value = ref('')
           ? repository.find((framework) => framework.value === value)?.label
           : "Select Repository..." }}
         </p>
-        <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        <CaretSortIcon class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>
     <PopoverContent class="w-[200px] ml-2.5 mt-3" style="background: #353535">
@@ -67,7 +67,7 @@ const value = ref('')
               }"
             >
               {{ repository.label }}
-              <Check
+              <CheckIcon
                   :class="cn(
                   'ml-auto h-4 w-4',
                   value === repository.value ? 'opacity-100' : 'opacity-0',
