@@ -1,30 +1,13 @@
 <script setup>
 definePageMeta({
-  layout: 'overview',
+  layout: 'dashboard-layout',
 })
 </script>
 
 <template>
-  <div class="content__container">
-    <div class="about">
-      <h1>About the system</h1>
+  <div class="py-[18px] px-6">
+    <div class="py-5 px-[18px] bg-background-secondary rounded-[10px]">
+      <h1 class="text-[14px] font-semibold">About the system</h1>
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.content__container {
-  padding: 18px 24px;
-
-  .about {
-    padding: 20px 18px;
-    background: var(--overview-secondary-background);
-    border-radius: 10px;
-
-    h1 {
-      font-size: 14px;
-      font-weight: 600;
-    }
-  }
-}
-</style>
