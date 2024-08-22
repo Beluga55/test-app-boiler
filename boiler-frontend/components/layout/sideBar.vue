@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import DefaultImage from "@/assets/images/default-user-icon.jpg"
+import DefaultImage from "~/assets/images/default-user-icon.jpg"
 import { CaretLeftIcon, ReaderIcon, GlobeIcon, ShadowInnerIcon, Share1Icon, Pencil1Icon, GearIcon, EnterIcon } from '@radix-icons/vue'
 import ComboBox from '~/components/ui/combobox/ComboBox.vue'
 
