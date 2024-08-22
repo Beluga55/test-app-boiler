@@ -6,7 +6,7 @@ import TopNav from '~/components/layout/topNav.vue'
 <template>
   <div class="flex">
     <Sidebar />
-    <div class="w-full">
+    <div class="w-[calc(100%-180px)]">
       <TopNav />
       <slot />
     </div>
