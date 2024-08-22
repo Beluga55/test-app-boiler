@@ -1,0 +1,94 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('../icons/icomoon.eot?y9rgf6');
+  src: url('../icons/icomoon.eot?y9rgf6#iefix') format('embedded-opentype'),
+  url('../icons/icomoon.ttf?y9rgf6') format('truetype'),
+  url('../icons/icomoon.woff?y9rgf6') format('woff'),
+  url('../icons/icomoon.svg?y9rgf6#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-circle .path1:before {
+  content: "\e901";
+  opacity: 0.0500;
+}
+
+.icon-circle .path2:before {
+  content: "\e902";
+  margin-left: -0.93359375em;
+  opacity: 0.1;
+}
+
+.icon-circle .path3:before {
+  content: "\e903";
+  margin-left: -0.93359375em;
+  opacity: 0.15;
+}
+
+.icon-circle .path4:before {
+  content: "\e904";
+  margin-left: -0.93359375em;
+  opacity: 0.2;
+}
+
+.icon-circle .path5:before {
+  content: "\e905";
+  margin-left: -0.93359375em;
+  opacity: 0.25;
+}
+
+.icon-circle .path6:before {
+  content: "\e906";
+  margin-left: -0.93359375em;
+  opacity: 0.3;
+}
+
+.icon-circle .path7:before {
+  content: "\e907";
+  margin-left: -0.93359375em;
+  opacity: 0.35;
+}
+
+.icon-circle .path8:before {
+  content: "\e908";
+  margin-left: -0.93359375em;
+  opacity: 0.4;
+}
+
+.icon-circle .path9:before {
+  content: "\e909";
+  margin-left: -0.93359375em;
+  opacity: 0.45;
+}
+
+.icon-circle .path10:before {
+  content: "\e90a";
+  margin-left: -0.93359375em;
+  opacity: 0.5;
+}
+
+.icon-circle .path11:before {
+  content: "\e90b";
+  margin-left: -0.93359375em;
+}
+
+.icon-overview:before {
+  content: "\e90c";
+}

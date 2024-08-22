@@ -34,6 +34,10 @@
     --ring: 222.2 84% 4.9%;
  
     --radius: 0.5rem;
+
+    /* ====== OVERVIEW PAGE COLOURS ====== */
+    --overview-background: #0D0E0C;
+    --overview-text: #ffffff;
   }
  
   .dark {
