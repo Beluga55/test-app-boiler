@@ -29,7 +29,10 @@ module.exports = {
           warning: "#FFAB2C",
           success: "#DCF928",
         },
-        border: "#27272A",
+        border: {
+          DEFAULT: "#27272A",
+          secondary: "#858585",
+        },
         button: {
           DEFAULT: "#27272A",
           secondary: "#353535",
