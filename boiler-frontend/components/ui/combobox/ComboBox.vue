@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { CaretSortIcon, CheckIcon } from '@radix-icons/vue'
-
 import { cn } from '~/lib/utils'
 import { Button } from '~/components/ui/button'
 import {
@@ -18,17 +17,42 @@ import {
   PopoverTrigger,
 } from '~/components/ui/popover'
 
-const repository = [
-  { value: 'pets-management-system', label: 'pets-management-system' },
-  { value: 'e-commerce-system', label: 'e-commerce-system' },
-  { value: 'nuxt-tutorial', label: 'Nuxt-tutorial' },
-  { value: 'remix-tutorial', label: 'Remix-tutorial' },
-  { value: 'astro-tutorial', label: 'Astro-tutorial' },
-]
+interface Item {
+  value: string
+  label: string
+}
+
+interface Props {
+  items: Item[]
+  placeholder: string
+  buttonClass?: string
+  popoverClass?: string
+  commandStyle?: string
+  modelValue: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  buttonClass: '',
+  popoverClass: '',
+  commandStyle: '',
+})
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void
+}>()
 
 const open = ref(false)
-const value = ref('')
 
+const selectedLabel = computed(() => {
+  return props.modelValue
+      ? props.items.find((item) => item.value === props.modelValue)?.label
+      : props.placeholder
+})
+
+const handleSelect = (selectedValue: string) => {
+  emit('update:modelValue', selectedValue)
+  open.value = false
+}
 </script>
 
 <template>
@@ -39,38 +63,31 @@ const value = ref('')
           size="overview"
           role="combobox"
           :aria-expanded="open"
-          class="w-[200px] justify-between"
+          :class="['w-[200px] justify-between', buttonClass]"
       >
-        <p class='w-[100px] overflow-hidden overflow-ellipsis text-left'>
-        {{ value
-          ? repository.find((framework) => framework.value === value)?.label
-          : "Select Repository..." }}
+        <p class="w-[100px] overflow-hidden overflow-ellipsis text-left">
+          {{ selectedLabel }}
         </p>
         <CaretSortIcon class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>
-    <PopoverContent class="w-[200px] ml-2.5 mt-3" style="background: #353535">
-      <Command style="background: #353535">
-        <CommandInput class="h-9" placeholder="Select Repository..." />
-        <CommandEmpty class="text-white font-medium">No framework found.</CommandEmpty>
+    <PopoverContent :class="['w-[200px] mt-3', popoverClass]" :style="commandStyle">
+      <Command :style="commandStyle">
+        <CommandInput class="h-9" :placeholder="placeholder" />
+        <CommandEmpty class="text-white font-medium">No item found.</CommandEmpty>
         <CommandList>
           <CommandGroup>
-            <CommandItem 
-                v-for="repository in repository"
-                :key="repository.value"
-                :value="repository.value"
-                @select="(ev) => {
-                if (typeof ev.detail.value === 'string') {
-                  value = ev.detail.value
-                }
-                open = false
-              }"
+            <CommandItem
+                v-for="item in items"
+                :key="item.value"
+                :value="item.value"
+                @select="handleSelect"
             >
-              {{ repository.label }}
+              {{ item.label }}
               <CheckIcon
                   :class="cn(
                   'ml-auto h-4 w-4',
-                  value === repository.value ? 'opacity-100' : 'opacity-0',
+                  modelValue === item.value ? 'opacity-100' : 'opacity-0'
                 )"
               />
             </CommandItem>
