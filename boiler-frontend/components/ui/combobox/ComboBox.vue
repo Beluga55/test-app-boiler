@@ -27,14 +27,14 @@ interface Props {
   placeholder: string
   buttonClass?: string
   popoverClass?: string
-  commandStyle?: string
+  commandStyle?: object
   modelValue: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   buttonClass: '',
   popoverClass: '',
-  commandStyle: '',
+  commandStyle: () => ({}),  // Return an empty object as default
 })
 
 const emit = defineEmits<{
@@ -49,9 +49,12 @@ const selectedLabel = computed(() => {
       : props.placeholder
 })
 
-const handleSelect = (selectedValue: string) => {
-  emit('update:modelValue', selectedValue)
-  open.value = false
+const handleSelect = (event: CustomEvent) => {
+  const selectedValue = typeof event === 'string' ? event : event.detail?.value
+  if (selectedValue) {
+    emit('update:modelValue', selectedValue)
+    open.value = false
+  }
 }
 </script>
 
