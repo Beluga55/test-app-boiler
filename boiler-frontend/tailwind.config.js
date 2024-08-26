@@ -32,6 +32,7 @@ module.exports = {
         border: {
           DEFAULT: "#27272A",
           secondary: "#858585",
+          status: "#3E7B01",
         },
         button: {
           DEFAULT: "#27272A",
