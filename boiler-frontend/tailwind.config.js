@@ -28,6 +28,10 @@ module.exports = {
           error: "#ff4e4e",
           warning: "#FFAB2C",
           success: "#DCF928",
+          developing: "#26FF9A",
+          testing: "#FFAB2C",
+          queued: "#C3A7FF",
+          draft: "#858585",
         },
         border: {
           DEFAULT: "#27272A",
