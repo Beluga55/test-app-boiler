@@ -26,6 +26,7 @@ interface Props {
   items: Item[]
   placeholder: string
   buttonClass?: string
+  textClass?: string
   popoverClass?: string
   commandStyle?: object
   modelValue: string
@@ -34,6 +35,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   buttonClass: '',
   popoverClass: '',
+  textClass: '',
   commandStyle: () => ({}),  // Return an empty object as default
 })
 
@@ -68,7 +70,7 @@ const handleSelect = (event: CustomEvent) => {
           :aria-expanded="open"
           :class="['w-[200px] justify-between', buttonClass]"
       >
-        <p class="w-[100px] overflow-hidden overflow-ellipsis text-left">
+        <p :class="['overflow-hidden overflow-ellipsis text-left text-[14px]', textClass]">
           {{ selectedLabel }}
         </p>
         <CaretSortIcon class="ml-2 h-4 w-4 shrink-0 opacity-50" />
