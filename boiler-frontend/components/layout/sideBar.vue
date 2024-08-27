@@ -9,7 +9,7 @@ const props = defineProps({
   isSidebarOpen: Boolean
 })
 
-const emit = defineEmits(['toggle-sidebar'])
+const emit = defineEmits(['toggle-sidebar', 'update:selectedRepository'])
 
 const route = useRoute();
 const selectedRepository = ref('');
@@ -33,6 +33,10 @@ const repositories = [
 const isActive = computed(() => (path) => route.path === path)
 
 const toggleSidebar = () => emit('toggle-sidebar')
+
+watch(selectedRepository, (newValue) => {
+  emit('update:selectedRepository', newValue)
+})
 </script>
 
 <template>
@@ -49,7 +53,7 @@ const toggleSidebar = () => emit('toggle-sidebar')
         <div v-if="props.isSidebarOpen" class="credit-badge text-black mt-[7px] ml-3.5 rounded-[32px] text-center w-fit py-[3px] px-3">
           <p class="font-medium text-[10px]">100 credits remaining +</p>
         </div>
-        <div v-if="props.isSidebarOpen" class="flex items-center gap-[7px] mt-[25px] mx-2 px-[13px] py-[9px] bg-button-secondary border-2 border-solid border-border rounded-[6px]">
+        <div v-if="props.isSidebarOpen" class="combo-box flex items-center gap-[7px] mt-[25px] mx-2 px-[13px] py-[9px] bg-button-secondary border-2 border-solid border-border rounded-[6px]">
           <ComboBox
               v-model="selectedRepository"
               :items="repositories"
@@ -58,13 +62,13 @@ const toggleSidebar = () => emit('toggle-sidebar')
           />
         </div>
       </header>
-      <nav class="px-2 py-1">
+      <nav class="px-2 py-2 flex flex-col gap-2">
         <NuxtLink
             v-for="item in navItems"
             :key="item.name"
             :to="item.path"
-            class="py-2.5 px-[10.5px] flex items-center gap-2 text-xs font-medium w-full cursor-pointer no-underline text-inherit"
-            :class="{ 'bg-button rounded-md text-primary-system': isActive(item.path) }"
+            class="py-2.5 px-[10.5px] flex items-center gap-2 text-xs font-medium w-full cursor-pointer no-underline text-inherit hover:bg-button rounded-md"
+            :class="{ 'bg-button text-primary-system': isActive(item.path) }"
         >
           <component :is="item.icon" :size="14" />
           <span class="text-[14px]" v-if="props.isSidebarOpen">{{ item.name }}</span>
