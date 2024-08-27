@@ -32,6 +32,7 @@ const route = useRoute();
           v-model="selectedStaging"
           :command-style="{ background: '#353535' }"
           :items="staging"
+          text-class="text-secondary-system"
           button-class="w-[180px] border-2 border-solid border-border rounded-[4px] px-3 py-2 font-medium"
           placeholder="Select Staging..."
       />
