@@ -36,25 +36,24 @@ const toggleSidebar = () => emit('toggle-sidebar')
 </script>
 
 <template>
-  <aside :class="['h-screen flex flex-col justify-between border-r-2 border-solid border-border', props.isSidebarOpen ? 'w-[180px]' : 'w-auto']">
+  <aside :class="['h-screen flex flex-col justify-between border-r-2 border-solid border-border', props.isSidebarOpen ? 'w-[242px]' : 'w-auto']">
     <div>
-      <header class="pb-2 border-b-2 border-solid border-border">
+      <header class="pb-2 border-b-2 border-solid border-border bg-background-secondary">
         <div class="pt-3.5 px-3.5 flex items-center justify-between">
-          <h1 v-if="props.isSidebarOpen" class="text-base font-bold">BLDR.</h1>
+          <h1 v-if="props.isSidebarOpen" class="text-[26px] font-bold">BLDR.</h1>
           <CaretLeftIcon
-              :class="['cursor-pointer', props.isSidebarOpen ? 'w-[18px] h-[18px]' : 'w-[23px] h-[23px]']"
+              :class="['cursor-pointer', 'w-[24px] h-[24px]']"
               @click="toggleSidebar"
           />
         </div>
-        <div v-if="props.isSidebarOpen" class="credit-badge text-black mt-[7px] ml-3.5 rounded-[32px] text-center w-fit py-[3px] px-1.5">
+        <div v-if="props.isSidebarOpen" class="credit-badge text-black mt-[7px] ml-3.5 rounded-[32px] text-center w-fit py-[3px] px-3">
           <p class="font-medium text-[10px]">100 credits remaining +</p>
         </div>
-        <div v-if="props.isSidebarOpen" class="flex items-center gap-[7px] mt-3 mx-2 px-[13px] py-[9px] bg-button-secondary border-2 border-solid border-border rounded-[6px]">
+        <div v-if="props.isSidebarOpen" class="flex items-center gap-[7px] mt-[25px] mx-2 px-[13px] py-[9px] bg-button-secondary border-2 border-solid border-border rounded-[6px]">
           <ComboBox
               v-model="selectedRepository"
               :items="repositories"
               placeholder="Select Repository..."
-              popover-class="ml-2.5"
               :command-style="{ background: '#353535' }"
           />
         </div>
@@ -68,7 +67,7 @@ const toggleSidebar = () => emit('toggle-sidebar')
             :class="{ 'bg-button rounded-md text-primary-system': isActive(item.path) }"
         >
           <component :is="item.icon" :size="14" />
-          <span v-if="props.isSidebarOpen">{{ item.name }}</span>
+          <span class="text-[14px]" v-if="props.isSidebarOpen">{{ item.name }}</span>
         </NuxtLink>
       </nav>
     </div>
