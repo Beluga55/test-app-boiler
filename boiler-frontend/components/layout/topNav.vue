@@ -16,13 +16,13 @@ const route = useRoute();
 
 <template>
   <nav class="bg-background-secondary w-full border-border border-b-2">
-    <div class="px-6 py-[11px] flex items-center gap-6">
-      <h1 class="text-sm font-bold text-text-secondary flex-1">Pet Management System / Overview</h1>
+    <div class="px-6 py-[10px] flex items-center gap-6">
+      <h1 class="text-[14px] font-bold text-text-secondary flex-1">Pet Management System / Overview</h1>
 
       <div
-          class="w-full bg-button-secondary flex justify-center rounded-[5px] flex-1 border-2 border-solid border-border">
-        <button class="flex items-center gap-2.5 text-[10px] text-text-secondary py-2">
-          <MagnifyingGlassIcon :size="12" class="rotate-90"/>
+          class="max-w-[450px] bg-button-secondary flex justify-center rounded-[5px] flex-1 border-2 border-solid border-border">
+        <button class="flex items-center gap-2.5 text-[14px] text-text-secondary py-2">
+          <MagnifyingGlassIcon :size="14" class="rotate-90"/>
           Pet Management System
         </button>
       </div>
@@ -32,7 +32,7 @@ const route = useRoute();
           v-model="selectedStaging"
           :command-style="{ background: '#353535' }"
           :items="staging"
-          button-class="border-2 border-solid border-border rounded-[4px] px-3 py-2 text-[10px] font-medium"
+          button-class="w-[180px] border-2 border-solid border-border rounded-[4px] px-3 py-2 font-medium"
           placeholder="Select Staging..."
       />
     </div>
