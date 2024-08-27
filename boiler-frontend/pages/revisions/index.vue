@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref, computed} from "vue";
-import { PlusIcon, ShadowInnerIcon, CheckIcon } from '@radix-icons/vue'
+import {PlusIcon, ShadowInnerIcon, CheckIcon, ChevronRightIcon, ChevronLeftIcon} from '@radix-icons/vue'
 import Pagination from "~/components/ui/pagination/Pagination.vue";
 
 definePageMeta({
@@ -121,6 +121,7 @@ const openRevisionsData = ref([
 /* ====== LIMIT OPEN REVISIONS DATA (10 Only using computed method) ====== */
 const itemsPerPage = ref(10)
 const currentPage = ref(1)
+const itemsToShow = 4
 
 const totalItems = computed(() => {
   return openRevisionsData.value.length;
@@ -142,17 +143,48 @@ openRevisionsData.value = [...openRevisionsData.value, ...openRevisionsData.valu
 // UNCOMMENT TO TEST EMPTY STATE
 // openRevisionsData.value = [];
 
+const visibleItems = computed(() => {
+  return featureData.value.slice(0, itemsToShow)
+})
+
+const nextSlide = () => {
+  featureData.value = [...featureData.value.slice(1), featureData.value[0]]
+}
+
+const prevSlide = () => {
+  featureData.value = [featureData.value[featureData.value.length - 1], ...featureData.value.slice(0, -1)]
+}
+
+const canSlide = computed(() => featureData.value.length > itemsToShow)
+
 </script>
 
 <template>
   <div class="py-[18px] px-6 h-[calc(100vh-3.75rem)] overflow-auto">
     <div class="mb-[18px]">
-      <h1 class="text-[14px] font-medium">Feature Suggestions</h1>
-      <div class="mt-2.5">
-        <div class="overflow-x-auto flex gap-4">
-          <div v-for="(feature, index) in featureData" :key="index" class="flex-1 mt-2.5 min-w-[200px] bg-background-secondary px-[18px] pt-4 pb-6 rounded-[8px] border-border border-2">
-            <h2 class="text-[14px] font-bold mb-2">{{ feature.title }}</h2>
-            <p class="text-xs font-medium text-text-secondary">{{ feature.description }}</p>
+      <h1 class="text-[16px] font-medium">Feature Suggestions</h1>
+      <div class="mt-2.5 relative">
+        <div>
+          <div class="flex items-stretch transition-transform duration-300 ease-in-out">
+            <button class="w-[90px] h-auto min-h-[170px] bg-background-secondary rounded-[8px] border-border border-2 flex justify-center items-center cursor-pointer"
+                    @click="prevSlide">
+              <ChevronLeftIcon :class="{ 'opacity-50': !canSlide }" class="w-10 h-10 text-primary-system"/>
+            </button>
+            <div class="w-full overflow-hidden">
+              <div class="flex">
+                <div v-for="(feature, index) in visibleItems" :key="index"
+                     class="flex-shrink-0 h-auto min-h-[170px] w-1/4 px-2">
+                  <div class="bg-background-secondary px-[18px] pt-4 pb-6 rounded-[8px] border-border border-2 h-full">
+                    <h2 class="text-[14px] font-bold mb-2">{{ feature.title }}</h2>
+                    <p class="text-xs font-medium text-text-secondary">{{ feature.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="w-[90px] h-auto min-h-[170px] bg-background-secondary rounded-[8px] border-border border-2 flex justify-center items-center"
+                    @click="nextSlide">
+              <ChevronRightIcon :class="{ 'opacity-50': !canSlide }" class="w-10 h-10 text-primary-system"/>
+            </button>
           </div>
         </div>
       </div>
