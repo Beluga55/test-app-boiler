@@ -4,6 +4,7 @@ import TopNav from '~/components/layout/topNav.vue'
 import { ref } from 'vue'
 
 const isSidebarOpen = ref(true);
+const selectedRepository = ref('');
 
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value
@@ -12,9 +13,9 @@ const toggleSidebar = () => {
 
 <template>
   <div class="flex">
-    <Sidebar :isSidebarOpen="isSidebarOpen" @toggle-sidebar="toggleSidebar" />
+    <Sidebar :isSidebarOpen="isSidebarOpen" @toggle-sidebar="toggleSidebar" @update:selectedRepository="selectedRepository = $event" />
     <div :class="[isSidebarOpen ? 'w-[calc(100%-242px)]' : 'w-[calc(100%-55px)]']">
-      <TopNav />
+      <TopNav :selectedRepository="selectedRepository" />
       <slot />
     </div>
   </div>
