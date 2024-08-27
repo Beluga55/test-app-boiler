@@ -13,7 +13,7 @@ const toggleSidebar = () => {
 <template>
   <div class="flex">
     <Sidebar :isSidebarOpen="isSidebarOpen" @toggle-sidebar="toggleSidebar" />
-    <div :class="[isSidebarOpen ? 'w-[calc(100%-180px)]' : 'w-[calc(100%-55px)]']">
+    <div :class="[isSidebarOpen ? 'w-[calc(100%-242px)]' : 'w-[calc(100%-55px)]']">
       <TopNav />
       <slot />
     </div>
